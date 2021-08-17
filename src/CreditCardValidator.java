@@ -15,7 +15,7 @@ public class CreditCardValidator
                     "Mastercard",
                     "American Express",
                     "Discover",
-                    "Diner's CLub/Carte Blanche",
+                    "Diner's CLub",
             };
 
     public static boolean ValidCreditCard(String number)
