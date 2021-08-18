@@ -1,5 +1,5 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class CreditCardValidator
 {
@@ -17,6 +17,44 @@ public class CreditCardValidator
                     "Discover",
                     "Diner's CLub",
             };
+
+    public static boolean ValidationCreditCard(String n)
+    {
+        try
+        {
+
+            int j = n.length();
+
+            String [] s1 = new String[j];
+            for (int i=0; i < n.length(); i++) s1[i] = "" + n.charAt(i);
+
+            int checksum = 0;
+
+            for (int i=s1.length-1; i >= 0; i-= 2)
+            {
+                int k = 0;
+
+                if (i > 0)
+                {
+                    k = Integer.valueOf(s1[i-1]).intValue() * 2;
+                    if (k > 9) {
+                        String s = "" + k;
+                        k = Integer.valueOf(s.substring(0,1)).intValue() +
+                                Integer.valueOf(s.substring(1)).intValue();
+                    }
+                    checksum += Integer.valueOf(s1[i]).intValue() + k;
+                }
+                else
+                    checksum += Integer.valueOf(s1[0]).intValue();
+            }
+            return ((checksum % 10) == 0);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     public static boolean ValidCreditCard(String number)
             throws Exception
@@ -89,47 +127,12 @@ public class CreditCardValidator
         }
     }
 
-    public static String getCardName(int id) {
+    public static String getCardName(int id)
+    {
         return (id > -1 && id < cardNames.length ? cardNames[id] : "");
     }
 
-    public static boolean ValidationCreditCard(String n)
-    {
-        try
-        {
 
-            int j = n.length();
-
-            String [] s1 = new String[j];
-            for (int i=0; i < n.length(); i++) s1[i] = "" + n.charAt(i);
-
-            int checksum = 0;
-
-            for (int i=s1.length-1; i >= 0; i-= 2)
-            {
-                int k = 0;
-
-                if (i > 0)
-                {
-                    k = Integer.valueOf(s1[i-1]).intValue() * 2;
-                    if (k > 9) {
-                        String s = "" + k;
-                        k = Integer.valueOf(s.substring(0,1)).intValue() +
-                                Integer.valueOf(s.substring(1)).intValue();
-                    }
-                    checksum += Integer.valueOf(s1[i]).intValue() + k;
-                }
-                else
-                    checksum += Integer.valueOf(s1[0]).intValue();
-            }
-            return ((checksum % 10) == 0);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-    }
 
     public static void main(String args[]) throws Exception
     {
@@ -145,7 +148,6 @@ public class CreditCardValidator
         }
         if (getCard(aCard) > -1)
         {
-            System.out.println("Эта карта поддерживается.");
             System.out.println("Это " + getCardName(getCard(aCard)));
             System.out.println("Ваш номер карты: " + aCard + ", проверка прошла" + (ValidCreditCard(aCard)?" успешно.":" неудачно."));
         }
