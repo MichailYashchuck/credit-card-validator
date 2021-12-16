@@ -37,7 +37,8 @@ public class CreditCardValidator
                 if (i > 0)
                 {
                     k = Integer.valueOf(s1[i-1]).intValue() * 2;
-                    if (k > 9) {
+                    if (k > 9) 
+                    {
                         String s = "" + k;
                         k = Integer.valueOf(s.substring(0,1)).intValue() +
                                 Integer.valueOf(s.substring(1)).intValue();
@@ -140,7 +141,8 @@ public class CreditCardValidator
 
         if (args.length > 0)
             aCard = args[0];
-        else {
+        else 
+        {
             BufferedReader input =
                     new BufferedReader(new InputStreamReader(System.in));
             System.out.print("Введите номер карты : ");
